@@ -1,0 +1,183 @@
+#:kivy 1.8
+
+<LabelBG>:
+
+    background_color: 0.75, 0.75, 0.75, 1
+    text_color: 0, 0, 0, 1
+
+    color: self.text_color
+    text_size: self.size
+    halign: 'center'
+    valign: 'middle'
+
+    canvas.before:
+        Color:
+            rgba: self.background_color
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+
+<TextInputNumBG>:
+
+    background_white: 1, 1, 1, 1
+    background_yellow: 1, 1, 0.5, 1
+    background_grey: 0.7, 0.7, 0.7, 1
+
+    background_color: self.background_white
+    multiline: False
+    padding: [0, (self.height - self.line_height)/2]
+    allow_copy: False
+    use_bubble: False
+    write_tab: False
+
+    size_hint_x: 0.4
+
+
+<WYTechLog>:
+    
+    arr_fuel: arr_fuel
+    fuel_fig_bef_ref: fuel_fig_bef_ref
+    fuel_used_on_grd: fuel_used_on_grd
+    dep_fuel: dep_fuel
+    metered_fuel: metered_fuel
+    sg: sg
+    cf: cf
+    met_uplift: met_uplift
+    tot_onboard: tot_onboard
+    actual_uplift: actual_uplift
+    discrepancy: discrepancy
+
+    orientation: 'vertical'
+    padding: 20
+    spacing: 10
+
+    on_touch_down: root.reCalculateEverything()
+    
+    LabelBG:
+        text: 'WYTechlog v0.1.1 alpha'
+        size_hint_y: 0.1
+    
+    GridLayout:
+        cols: 3
+        
+        LabelBG:
+            text: 'ARRIVAL FUEL (Kg)'
+            
+        LabelBG:
+            text: 'A'
+            size_hint_x: 0.1
+        TextInputNumBG:
+            id: arr_fuel
+            background_color: self.background_yellow
+        
+        LabelBG:
+            text: 'FUEL FIGURE BEFORE REFUELING (Kg)'
+            
+        LabelBG:
+            text: 'B'
+            size_hint_x: 0.1
+        TextInputNumBG:
+            id: fuel_fig_bef_ref
+        
+        LabelBG:
+            text: 'FUEL USED ON GROUND (Kg) (A-B)'
+            
+        LabelBG:
+            text: 'C'
+            size_hint_x: 0.1
+        TextInputNumBG:
+            id: fuel_used_on_grd
+            background_color: self.background_grey
+            readonly: True
+        
+        LabelBG:
+            text: 'TOTAL REQUIRED DEPARTURE FUEL (Kg)'
+            
+        LabelBG:
+            text: 'D'
+            size_hint_x: 0.1
+        TextInputNumBG:
+            id: dep_fuel
+            background_color: self.background_yellow
+        
+        # TODO : include US G ans IMP G
+        LabelBG:
+            text: 'METERED FUEL (LTs)'
+            
+        LabelBG:
+            text: 'E'
+            size_hint_x: 0.1
+        TextInputNumBG:
+            id: metered_fuel
+        
+        LabelBG:
+            text: 'REFUELLING S.G.'
+            
+        LabelBG:
+            text: 'F'
+            size_hint_x: 0.1
+        TextInputNumBG:
+            id: sg
+        
+        LabelBG:
+            text: 'CONVERSION FACTOR'
+            
+        LabelBG:
+            text: 'G'
+            size_hint_x: 0.1
+        TextInputNumBG:
+            id: cf
+            background_color: self.background_grey
+            readonly: True
+        
+        LabelBG:
+            text: 'METERED UPLIFT (Kg) (E : G)'
+            
+        LabelBG:
+            text: 'H'
+            size_hint_x: 0.1
+        TextInputNumBG:
+            id: met_uplift
+            background_color: self.background_grey
+            readonly: True
+        
+        LabelBG:
+            text: 'TOTAL ONBOARD (KGS) ECAM/EICAS'
+            
+        LabelBG:
+            text: 'I'
+            size_hint_x: 0.1
+        TextInputNumBG:
+            id: tot_onboard
+        
+        LabelBG:
+            text: 'ACTUAL UPLIFT (KGs) (I - B)'
+            
+        LabelBG:
+            text: 'J'
+            size_hint_x: 0.1
+        TextInputNumBG:
+            id: actual_uplift
+            background_color: self.background_grey
+            readonly: True
+        
+        LabelBG:
+            text: 'DISCREPANCY (%) (J - H) : J x 100'
+
+        LabelBG:
+            text: 'K'
+            size_hint_x: 0.1
+        TextInputNumBG:
+            id: discrepancy
+            background_color: self.background_grey
+            readonly: True
+            
+    Button:
+        text: "Calculate !"
+        on_press: root.reCalculateEverything()
+        size_hint_y: 0.1
+
+    LabelBG:
+        text: "Unofficial WY Aircraft Technical Log helper"
+        size_hint_y: 0.05
