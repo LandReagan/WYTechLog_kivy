@@ -3,8 +3,7 @@ kivy.require('1.0.5')
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.label import Label
 from kivy.uix.textinput import TextInput
-from kivy.uix.behaviors.focus import FocusBehavior
-from kivy.properties import ListProperty, ObjectProperty
+from kivy.properties import ObjectProperty
 from kivy.app import App
 
 import re
@@ -26,7 +25,7 @@ class TextInputNumBG(TextInput):
         TextInput.insert_text(self, s, from_undo=from_undo)
 
     def on_double_tap(self):
-        """ Overriding i.o.t avoid text selction """
+        """ Overriding i.o.t avoid text selection """
         pass
 
 
